@@ -1,0 +1,132 @@
+/**
+ * Menampilkan kartu dialog Pengenalan Diri
+ */
+function showProfileCard() {
+  const htmlContent = `
+    <!DOCTYPE html>
+    <html>
+      <head>
+        <base target="_top">
+        <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+        <style>
+          :root {
+            --bg-color: #0f172a;
+            --card-bg: #1e293b;
+            --accent: #6366f1;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+          }
+          
+          * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+          }
+          
+          body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+          }
+          
+          .card {
+            background: var(--card-bg);
+            border-radius: 16px;
+            padding: 24px;
+            width: 100%;
+            max-width: 360px;
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            text-align: center;
+          }
+          
+          .avatar {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #6366f1, #a855f7);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 32px;
+            margin: 0 auto 16px auto;
+            box-shadow: 0 4px 12px rgba(99, 102, 241, 0.4);
+          }
+          
+          .name {
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 4px;
+          }
+          
+          .title {
+            color: var(--accent);
+            font-size: 0.875rem;
+            font-weight: 600;
+            margin-bottom: 16px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+          }
+          
+          .bio {
+            color: var(--text-muted);
+            font-size: 0.875rem;
+            line-height: 1.6;
+            margin-bottom: 20px;
+            text-align: justify;
+          }
+          
+          .btn {
+            background: var(--accent);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 0.875rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            width: 100%;
+          }
+          
+          .btn:hover {
+            opacity: 0.9;
+            transform: translateY(-1px);
+          }
+        </style>
+      </head>
+      <body>
+        <div class="card">
+          <div class="avatar">👨‍💻</div>
+          <div class="name">Lorem Ipsum</div>
+          <div class="title">Dolor Sit Amet</div>
+          <p class="bio">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation.
+          </p>
+          <button class="btn" onclick="google.script.host.close()">Tutup Profile</button>
+        </div>
+      </body>
+    </html>
+  `;
+
+  const htmlOutput = HtmlService.createHtmlOutput(htmlContent)
+      .setWidth(400)
+      .setHeight(450);
+      
+  SpreadsheetApp.getUi().showModalDialog(htmlOutput, ' ');
+}
+
+/**
+ * Menambahkan menu khusus di Google Sheets/Docs untuk membuka profile
+ */
+function onOpen() {
+  SpreadsheetApp.getUi()
+      .createMenu(' Profile')
+      .addItem('Tampilkan Kartu Diri', 'showProfileCard')
+      .addToUi();
+}
